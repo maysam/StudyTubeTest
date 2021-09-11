@@ -87,6 +87,10 @@ GEM
       activesupport (>= 5.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    interactor (3.1.2)
+    interactor-rails (2.2.1)
+      interactor (~> 3.0)
+      rails (>= 4.2)
     json-schema (2.8.1)
       addressable (>= 2.4)
     jsonapi-renderer (0.2.2)
@@ -202,6 +206,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   factory_bot_rails
+  interactor-rails
   listen (~> 3.3)
   puma (~> 5.0)
   rails (~> 6.1.4, >= 6.1.4.1)

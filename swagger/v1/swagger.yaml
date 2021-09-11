@@ -42,7 +42,7 @@ paths:
         '201':
           description: creates new stock with new bearer
         '422':
-          description: invalid stock params
+          description: invalid stock param
       requestBody:
         content:
           application/json:
@@ -76,9 +76,9 @@ paths:
           type: string
       responses:
         '200':
-          description: updates medical_datum
+          description: ignores the invalid bearer param
         '422':
-          description: invalid stock params
+          description: invalid stock param
         '404':
           description: invalid stock id
       requestBody:

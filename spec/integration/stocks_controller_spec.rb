@@ -100,7 +100,7 @@ describe Stock do
       end
 
       response '422', 'invalid bearer param' do
-        let(:stock_params) { { name: '', bearer: '' } }
+        let(:stock_params) { { name: 'stock name', bearer: '' } }
 
         run_test! do
           errors = JSON.parse(response.body)['errors']
@@ -172,13 +172,12 @@ describe Stock do
         end
       end
 
-      response '422', 'invalid bearer param' do
-        let(:stock_params) { { name: '', bearer: '' } }
+      response '200', 'ignores the invalid bearer param' do
+        let(:stock_params) { { name: 'stock name', bearer: '' } }
 
         run_test! do
-          errors = JSON.parse(response.body)['errors']
-
-          expect(errors['bearer']).to eq([ErrorMessages.invalid_params])
+          stock.reload
+          expect(stock.bearer.name).not_to be ''
         end
       end
 

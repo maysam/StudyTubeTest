@@ -5,26 +5,26 @@ module V1
     before_action :find_stock, only: %i[update destroy]
 
     def index
-      render json: Stock.not_archived.includes(:bearer), each_serializer: V1::StockSerializer
+      render json: Stock.not_archived.includes(:bearer), each_serializer: V1::StockSerializer, cached: true
     end
 
     def create
-      bearer = Bearer.find_or_create_by!(name: stock_params[:bearer])
-      stock = bearer.stocks.new name: stock_params[:name]
-      if stock.save
-        render json: stock, status: :created
+      result = StockCreator.call(params: stock_params)
+      if result.success?
+        render json: result.stock, status: :created
       else
-        render json: { errors: stock.errors }, status: :unprocessable_entity
+        render json: { errors: result.errors }, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordInvalid
       render json: { errors: { bearer: [ErrorMessages.invalid_params] } }, status: :unprocessable_entity
     end
 
     def update
-      if @stock.update_by_params(stock_params)
-        render json: @stock, status: :ok
+      result = StockUpdater.call(stock: @stock, params: stock_params)
+      if result.success?
+        render json: result.stock, status: :ok
       else
-        render json: { errors: @stock.errors }, status: :unprocessable_entity
+        render json: { errors: result.errors }, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordInvalid
       render json: { errors: { bearer: [ErrorMessages.invalid_params] } }, status: :unprocessable_entity
