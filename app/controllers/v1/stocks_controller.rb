@@ -2,6 +2,8 @@
 
 module V1
   class StocksController < ApplicationController
+    before_action :find_stock, only: %i[update destroy]
+
     def index
       render json: Stock.not_archived, each_serializer: V1::StockSerializer
     end
@@ -19,30 +21,30 @@ module V1
     end
 
     def update
-      stock = Stock.not_archived.find(params[:id])
-      if stock.update_by_params(stock_params)
-        render json: stock, status: :ok
+      if @stock.update_by_params(stock_params)
+        render json: @stock, status: :ok
       else
-        render json: { errors: stock.errors }, status: :unprocessable_entity
+        render json: { errors: @stock.errors }, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordInvalid
       render json: { errors: { bearer: [ErrorMessages.invalid_params] } }, status: :unprocessable_entity
-    rescue ActiveRecord::RecordNotFound
-      render json: { errors: { stock: [ErrorMessages.record_not_found] } }, status: :not_found
     end
 
     def destroy
-      stock = Stock.not_archived.find(params[:id])
-      if stock.archive
+      if @stock.archive
         render status: :ok
       else
-        render json: { errors: stock.errors }, status: :unprocessable
+        render json: { errors: @stock.errors }, status: :unprocessable
       end
-    rescue ActiveRecord::RecordNotFound
-      render json: { errors: { stock: [ErrorMessages.record_not_found] } }, status: :not_found
     end
 
     private
+
+    def find_stock
+      @stock = Stock.not_archived.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render json: { errors: { stock: [ErrorMessages.record_not_found] } }, status: :not_found
+    end
 
     def stock_params
       params.require(:stock).permit(:name, :bearer)
