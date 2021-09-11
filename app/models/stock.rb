@@ -5,7 +5,7 @@ class Stock < ApplicationRecord
 
   belongs_to :bearer
 
-  validates :name, uniqueness: { message: ErrorMessages.name_already_exists }
+  validates :name, uniqueness: { message: ErrorMessages.already_exists }
   validates :name, presence: { message: ErrorMessages.missing }
   validates :bearer, presence: { message: ErrorMessages.missing }
 

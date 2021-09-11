@@ -83,7 +83,23 @@ describe Stock do
         end
       end
 
-      response '422', 'invalid bearer params' do
+      response '422', 'does not create new stock with duplicate name' do
+        let(:old_stock) { create(:stock) }
+        let(:stock_params) do
+          {
+            name: old_stock.name,
+            bearer: 'new bearer'
+          }
+        end
+
+        run_test! do
+          errors = JSON.parse(response.body)['errors']
+
+          expect(errors['name']).to eq([ErrorMessages.already_exists])
+        end
+      end
+
+      response '422', 'invalid bearer param' do
         let(:stock_params) { { name: '', bearer: '' } }
 
         run_test! do
@@ -93,7 +109,7 @@ describe Stock do
         end
       end
 
-      response '422', 'invalid stock params' do
+      response '422', 'invalid stock param' do
         let(:stock_params) { { name: '', bearer: 'bearer name' } }
 
         run_test! do
@@ -140,7 +156,23 @@ describe Stock do
         end
       end
 
-      response '422', 'invalid bearer params' do
+      response '422', 'does not create new stock with duplicate name' do
+        let(:old_stock) { create(:stock) }
+        let(:stock_params) do
+          {
+            name: old_stock.name,
+            bearer: 'new bearer'
+          }
+        end
+
+        run_test! do
+          errors = JSON.parse(response.body)['errors']
+
+          expect(errors['name']).to eq([ErrorMessages.already_exists])
+        end
+      end
+
+      response '422', 'invalid bearer param' do
         let(:stock_params) { { name: '', bearer: '' } }
 
         run_test! do
@@ -150,7 +182,7 @@ describe Stock do
         end
       end
 
-      response '422', 'invalid stock params' do
+      response '422', 'invalid stock param' do
         let(:stock_params) { { name: '', bearer: 'bearer name' } }
 
         run_test! do

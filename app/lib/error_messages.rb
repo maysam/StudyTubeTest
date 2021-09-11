@@ -30,7 +30,7 @@ class ErrorMessages
       'INVALID_PARAMETERS'
     end
 
-    def name_already_exists
+    def already_exists
       'ALREADY_EXISTS'
     end
 
