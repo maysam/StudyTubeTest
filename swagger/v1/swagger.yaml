@@ -1,0 +1,123 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/v1/stocks":
+    get:
+      summary: Gets all stocks
+      tags:
+      - Stocks
+      responses:
+        '200':
+          description: gets all the stocks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: number
+                      example: 85
+                    name:
+                      type: string
+                      example: good stock
+                    bearer:
+                      type: string
+                      example: good bearer
+                    updated_at:
+                      type: string
+                      example: '2021-01-26T23:00:00+01:00'
+                    created_at:
+                      type: string
+                      example: '2021-01-26T23:00:00+01:00'
+    post:
+      summary: Creates new stock
+      tags:
+      - Stocks
+      parameters: []
+      responses:
+        '201':
+          description: creates new stock with new bearer
+        '422':
+          description: invalid stock params
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                stock:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: stock name
+                    bearer:
+                      type: string
+                      example: bearer name
+                  required:
+                  - name
+                  - bearer
+              required:
+              - stock
+  "/v1/stocks/{stock_id}":
+    patch:
+      summary: updates stock
+      tags:
+      - Stocks
+      parameters:
+      - name: stock_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: updates medical_datum
+        '422':
+          description: invalid stock params
+        '404':
+          description: invalid stock id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                stock:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: new stock name
+                    bearer:
+                      type: string
+                      example: new bearer name
+                  required:
+                  - name
+                  - bearer
+              required:
+              - stock
+    delete:
+      summary: Soft deletes stock
+      tags:
+      - Stocks
+      parameters:
+      - name: stock_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: soft deletes stock
+        '404':
+          description: invalid stock id
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
