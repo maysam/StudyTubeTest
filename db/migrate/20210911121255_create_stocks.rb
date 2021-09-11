@@ -10,5 +10,6 @@ class CreateStocks < ActiveRecord::Migration[6.1]
       t.timestamps
     end
     add_index :stocks, :bearer_id
+    add_index :stocks, :archived_at
   end
 end
