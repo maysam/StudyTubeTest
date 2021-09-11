@@ -1,24 +1,26 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Prerequisites
 
-Things you may want to cover:
+* Rails - 6.1.4.1
+* Ruby - 2.7.4
 
-* Ruby version
+## Installation Steps
+* Clone this repo
+* `cd` into the repo
+* run `bundle install` to install dependencies
+* Run  `rails db:create` to create the database
+* Run `rails db:migrate` to create all the  necessary tables.
+* Start the app by running `rails s`
 
-* System dependencies
+## Tests
+* Run `rspec spec` to run all the tests
 
-* Configuration
+## API documentation
+* Run `rails s` and visit `http://localhost:3000/api-docs/index.html`
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Endpoints
+* Add stock - `POST http://localhost:3000/v1/stocks`. Parameters - `{ name: string, bearer: string }`
+* Update stock - `PATCH http://localhost:3000/v1/stocks/:id`. Parameters - `{ name: string, bearer: string }`
+* Delete stock - `DELETE http://localhost:3000/v1/stocks/:id`
+* Fetch all stocks - `GET http://localhost:3000/v1/stocks`
