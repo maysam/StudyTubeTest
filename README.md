@@ -19,8 +19,16 @@
 ## API documentation
 * Run `rails s` and visit `http://localhost:3000/api-docs/index.html`
 
-## Endpoints
+## Available Endpoints
+
 * Add stock - `POST http://localhost:3000/v1/stocks`. Parameters - `{ name: string, bearer: string }`
 * Update stock - `PATCH http://localhost:3000/v1/stocks/:id`. Parameters - `{ name: string, bearer: string }`
 * Delete stock - `DELETE http://localhost:3000/v1/stocks/:id`
 * Fetch all stocks - `GET http://localhost:3000/v1/stocks`
+
+
+#### To improve
+
+- Pagination is missing for index call
+- Authorization by token is missing
+- Migrate to RDBMS from SQlite

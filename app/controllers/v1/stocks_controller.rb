@@ -5,7 +5,7 @@ module V1
     before_action :find_stock, only: %i[update destroy]
 
     def index
-      render json: Stock.not_archived, each_serializer: V1::StockSerializer
+      render json: Stock.not_archived.includes(:bearer), each_serializer: V1::StockSerializer
     end
 
     def create
