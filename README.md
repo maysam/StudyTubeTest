@@ -21,10 +21,10 @@
 
 ## Available Endpoints
 
-* Add stock - `POST http://localhost:3000/v1/stocks`. Parameters - `{ name: string, bearer: string }`
-* Update stock - `PATCH http://localhost:3000/v1/stocks/:id`. Parameters - `{ name: string, bearer: string }`
-* Delete stock - `DELETE http://localhost:3000/v1/stocks/:id`
-* Fetch all stocks - `GET http://localhost:3000/v1/stocks`
+* Add stock - `POST http://localhost:3000/api/v1/stocks`. Parameters - `{ name: string, bearer: string }`
+* Update stock - `PATCH http://localhost:3000/api/v1/stocks/:id`. Parameters - `{ name: string, bearer: string }`
+* Delete stock - `DELETE http://localhost:3000/api/v1/stocks/:id`
+* Fetch all stocks - `GET http://localhost:3000/api/v1/stocks`
 
 
 #### To improve

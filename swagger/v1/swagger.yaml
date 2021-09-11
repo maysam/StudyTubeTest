@@ -4,7 +4,7 @@ info:
   title: API V1
   version: v1
 paths:
-  "/v1/stocks":
+  "/api/v1/stocks":
     get:
       summary: Gets all stocks
       tags:
@@ -63,7 +63,7 @@ paths:
                   - bearer
               required:
               - stock
-  "/v1/stocks/{stock_id}":
+  "/api/v1/stocks/{stock_id}":
     patch:
       summary: updates stock
       tags:

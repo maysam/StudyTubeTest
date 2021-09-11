@@ -3,7 +3,7 @@
 require 'swagger_helper'
 
 describe Stock do
-  path '/v1/stocks' do
+  path '/api/v1/stocks' do
     get 'Gets all stocks' do
       tags 'Stocks'
       consumes 'application/json'
@@ -121,7 +121,7 @@ describe Stock do
     end
   end
 
-  path '/v1/stocks/{stock_id}' do
+  path '/api/v1/stocks/{stock_id}' do
     patch 'updates stock' do
       tags 'Stocks'
       consumes 'application/json'
